@@ -1,7 +1,7 @@
 <h1 align="center">AntiTracker</h1>
 <div align="center">
   <img width="300" src="https://github.com/user-attachments/assets/476519c3-32de-4416-8b30-81667294f4d6">
-  <p align="center"><i>Open-source privacy: Obfuscate, simulate, and take control of your web tracking.</i></p>
+  <p align="center"><i>Open-source privacy: Obfuscate, and take control of your web tracking.</i></p>
 </div>
 
 ---
