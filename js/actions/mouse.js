@@ -38,9 +38,9 @@ export const mouse = () => {
         const domain = window.location.hostname;
         if (options.disallowed.includes(domain)) return; 
 
-
-        console.log("Original position:", e.clientX, e.clientY); // Posición original
-        console.log("Obfuscated position:", noise(e.clientX), noise(e.clientY)); // Posición con ruido
+        //debug messages
+        //console.log("Original position:", e.clientX, e.clientY); // Posición original
+        //console.log("Obfuscated position:", noise(e.clientX), noise(e.clientY)); // Posición con ruido
     
 
         const props = {
@@ -58,7 +58,7 @@ export const mouse = () => {
         e.stopImmediatePropagation(); // stop loop
     };
 
-    // Cargar configuración inicial desde `browser.storage.sync`
+    // load the initial config
     const loadSettings = async () => {
         const prefs = await browser.storage.sync.get({
             noiseValue: 1,
