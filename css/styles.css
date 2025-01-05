@@ -1,0 +1,48 @@
+@import "./colors.css";
+
+.extension-panel {
+    background-color: --var(--background-primary);
+}
+
+nav {
+    background-color: var(--primary-main);
+}
+
+nav a {
+    color: var(--neutral-white) !important;
+    font-weight: bold;
+}
+
+.logo {
+    margin-top: -10px;
+}
+
+/* Fix switch layout */
+.form-check.form-switch {
+    display: flex;
+    flex-direction: row-reverse; /* Reverse the order of elements */
+    justify-content: space-between;
+    padding-left: 0; /* Remove default padding */
+}
+
+.form-check.form-switch .form-check-input {
+    margin-left: 0;
+    float: none;
+}
+
+.form-check.form-switch .form-check-label {
+    margin-right: 1rem;
+    flex: 1;
+}
+
+/* Select all button */
+.form-check.form-switch:first-of-type {
+    border-bottom: 1px solid var(--border-primary);
+    margin-bottom: 1rem !important;
+    padding-bottom: 1rem;
+}
+
+.form-check.form-switch:first-of-type .form-check-label {
+    font-weight: bold;
+    color: var(--primary-main);
+}

@@ -1,0 +1,43 @@
+:root {
+    /* Primary Colors */
+    --primary-main: #663399;
+    --primary-light: #7b4ba5;
+    --primary-dark: #512b85;
+
+    /* Secondary Colors */
+    --secondary-main: #ffb800;
+    --secondary-light: #ffc833;
+    --secondary-dark: #cc9400;
+
+    /* Neutral Colors */
+    --neutral-white: #ffffff;
+    --neutral-black: #2d2d2d;
+    --neutral-gray: #e5e7eb;
+
+    /* Accent Colors */
+    --accent-purple: #9747ff;
+    --accent-light: #f3e8ff;
+
+    /* Semantic Colors */
+    --text-primary: var(--neutral-black);
+    --text-secondary: #4b5563;
+    --text-disabled: #9ca3af;
+
+    /* Background Colors */
+    --background-primary: var(--neutral-white);
+    --background-secondary: var(--accent-light);
+
+    /* Border Colors */
+    --border-primary: var(--neutral-gray);
+    --border-focus: var(--primary-main);
+
+    /* Button Colors */
+    --button-primary-bg: var(--secondary-main);
+    --button-primary-hover: var(--secondary-light);
+    --button-primary-text: var(--neutral-white);
+
+    /* Interactive States */
+    --hover-overlay: rgba(0, 0, 0, 0.04);
+    --active-overlay: rgba(0, 0, 0, 0.1);
+    --disabled-overlay: rgba(0, 0, 0, 0.12);
+}
