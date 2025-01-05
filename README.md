@@ -8,9 +8,10 @@
 
 # Implement your own AntiTracker plugin
 1. Add a new switch to the `popup.html` file:
+
 ![image](https://github.com/user-attachments/assets/77a61290-5e13-40d2-8af0-a2cc1eb0ea5f)
 
-2. Edit `js/main.js` file:
+3. Edit `js/main.js` file:
   - Add the new html element to the `featureSwitches` array:
   
     ![image](https://github.com/user-attachments/assets/57f41fdd-0861-4cb7-a466-8aa0ef7c6646)
@@ -29,6 +30,8 @@
 3. Click on "Load Temporary Add-on" and select any of the files of the extension directory.
 
 # Debugging
-In order spawn the devtools terminal for the extension, about:debugging#/runtime/this-firefox, and click the button "Inspect".
+In order spawn the devtools terminal for the extension, navigate to about:debugging#/runtime/this-firefox, and click the button "Inspect".
+
 The data of the extension popup (console log, HTML elements...) will clear from the devtools every time the popup of the extension is closed. In order to prevent automatic closing, click on the three dots on the top-right corner, and then "Disable Popup Auto-Hide"
+
 ![image](https://github.com/user-attachments/assets/c4c60689-d6c1-4fb6-9a54-419cb33fbe53)
