@@ -17,7 +17,7 @@
   - Create the event listener function for the new switch:
 
     ![image](https://github.com/user-attachments/assets/1065e9f2-f152-4259-80b0-d07d9fe19612)
-  - Implement your functions in the under `/js/actions/<your-actions>.js` (in this case `js/actions/mouse.js`)
+  - Implement your functions in the under `/js/actions/<your-actions>.js` (in this case `/js/actions/mouse.js`)
   
     ![image](https://github.com/user-attachments/assets/de8836b0-e718-45e4-a09f-cbfe3e35aefe)
 
