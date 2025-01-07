@@ -6,7 +6,7 @@
 
   // Function to add noise to image data
   function addNoise(imageData) {
-    const noiseLevel = 10; 
+    const noiseLevel = 30; 
     console.log("Adding noise to image data...");
 
     for (let i = 0; i < imageData.data.length; i += 4) {
