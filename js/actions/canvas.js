@@ -1,3 +1,7 @@
+export const canvas = () => {
+  console.log("Canvas main function called!"); // Export function
+};
+
 (function () {
   // Backup of original methods
   const originalToDataURL = HTMLCanvasElement.prototype.toDataURL;
@@ -72,7 +76,4 @@
   console.log("Canvas fingerprinting protection active with dynamic noise addition.");
 })();
 
-// Export function
-export const canvas = () => {
-  console.log("Canvas main function called!");
-};
+
