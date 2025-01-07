@@ -10,7 +10,11 @@
     console.log("Adding noise to image data...");
 
     for (let i = 0; i < imageData.data.length; i += 4) {
-      const noise = () => Math.floor(Math.random() * noiseLevel) - noiseLevel / 2;
+      const noise = () => {
+  const array = new Uint8Array(1); 
+  crypto.getRandomValues(array); 
+  return Math.floor((array[0] / 255) * noiseLevel) - noiseLevel / 2;
+};
 
       // Clamp function to ensure the valid range [0, 255]
       const clamp = (value) => Math.min(255, Math.max(0, value));
