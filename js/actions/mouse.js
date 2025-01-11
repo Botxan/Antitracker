@@ -3,12 +3,13 @@ export const mouse = () => {
 
     // Predet options
     let options = {
-        noiseValue: 1, 
+        noiseValue: 100, 
         disallowed: [], // domains where not applied
     };
 
     // Add noise
     const noise = (() => {
+        console.log("noise...");
         let useSpare = false;
         let spare;
 
@@ -39,8 +40,8 @@ export const mouse = () => {
         if (options.disallowed.includes(domain)) return; 
 
         //debug messages
-        //console.log("Original position:", e.clientX, e.clientY); // Posición original
-        //console.log("Obfuscated position:", noise(e.clientX), noise(e.clientY)); // Posición con ruido
+        console.log("Original position:", e.clientX, e.clientY); // Posición original
+        console.log("Obfuscated position:", noise(e.clientX), noise(e.clientY)); // Posición con ruido
     
 
         const props = {
@@ -61,7 +62,7 @@ export const mouse = () => {
     // load the initial config
     const loadSettings = async () => {
         const prefs = await browser.storage.sync.get({
-            noiseValue: 1,
+            noiseValue: 100,
             disallowed: [],
         });
         options.noiseValue = prefs.noiseValue;
