@@ -3,7 +3,7 @@ export const mouse = () => {
 
     // Predet options
     let options = {
-        noiseValue: 100, 
+        noiseValue: 10, 
         disallowed: [], // domains where not applied
     };
 
@@ -62,7 +62,7 @@ export const mouse = () => {
     // load the initial config
     const loadSettings = async () => {
         const prefs = await browser.storage.sync.get({
-            noiseValue: 100,
+            noiseValue: 10,
             disallowed: [],
         });
         options.noiseValue = prefs.noiseValue;
