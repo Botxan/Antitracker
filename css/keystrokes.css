@@ -1,0 +1,16 @@
+.private-input-overlay {
+    display: none;
+    position: absolute;
+    z-index: 10000;
+    padding: 0;
+}
+
+.private-input-box {
+    border: none;
+    outline: none;
+    background: purple;
+    color: white;
+    margin: 0;
+    box-sizing: border-box;
+    display: block;
+}

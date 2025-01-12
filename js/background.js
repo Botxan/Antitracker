@@ -1,7 +1,6 @@
 // background.js
 import HeaderObfuscator from "./actions/headers/HeaderObfuscator.js";
 import { mouse } from "./actions/mouse.js";
-import { keystrokes } from "./actions/keystrokes.js";
 import { canvas } from "./actions/canvas.js";
 
 // Single instance of header obfuscator
@@ -21,7 +20,18 @@ const moduleHandlers = {
     },
 
     keystrokes: (enabled) => {
-        if (enabled) keystrokes();
+        // Send message to toggle keystroke protection to all tabs
+        browser.tabs.query({}).then(tabs => {
+            for (const tab of tabs) {
+                if (tab.url.startsWith('http')) {
+                    browser.tabs.sendMessage(tab.id, {
+                        action: 'toggleKeystrokes',
+                        enabled: enabled
+                    })
+                    .catch(err => console.error('Failed to disable keystroke protection', tab.id, err));
+                }
+            }
+        });
     },
 
     canvas: (enabled) => {

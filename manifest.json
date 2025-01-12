@@ -23,6 +23,13 @@
     "browser_action": {
         "default_popup": "popup.html"
     },
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["/js/content-scripts/keystrokes.js"],
+        "css": ["/css/keystrokes.css"],
+        "run_at": "document_start",
+        "type": "module"
+    }],
     "background": {
         "scripts": ["js/background.js"],
         "type": "module"
