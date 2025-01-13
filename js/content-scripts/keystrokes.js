@@ -226,6 +226,7 @@ function removeKeystrokeProtection() {
 
 // Listen for messages from background script
 browser.runtime.onMessage.addListener((message) => {
+    console.log("Received message:", message);
     if (message.action === 'toggleKeystrokes') {
         if (message.enabled) {
             initializeKeystrokeProtection();

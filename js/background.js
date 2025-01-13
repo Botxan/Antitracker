@@ -1,6 +1,5 @@
 // background.js
 import HeaderObfuscator from "./actions/headers/HeaderObfuscator.js";
-import { mouse } from "./actions/mouse.js";
 import { canvas } from "./actions/canvas.js";
 
 // Single instance of header obfuscator
@@ -16,7 +15,19 @@ const moduleHandlers = {
     },
 
     mouse: (enabled) => {
-        if (enabled) mouse();
+        // Send message to toggle mouse protection to all tabs
+        browser.tabs.query({}).then(tabs => {
+            for (const tab of tabs) {
+                console.log("Sending to tab ", tab);
+                if (tab.url.startsWith('http')) {
+                    browser.tabs.sendMessage(tab.id, {
+                        action: 'toggleMouse',
+                        enabled: enabled
+                    })
+                    .catch(err => console.error('Failed to toggle mouse protection', tab.id, err));
+                }
+            }
+        });
     },
 
     keystrokes: (enabled) => {
