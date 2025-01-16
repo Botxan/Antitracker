@@ -16,6 +16,7 @@
         "webRequest",
         "webRequestBlocking",
         "storage",
+        "webNavigation",
         "menus",
         "management",
         "<all_urls>"
@@ -25,13 +26,16 @@
     },
     "content_scripts": [{
         "matches": ["<all_urls>"],
-        "js": ["/js/modules/keystrokes.js", "/js/modules/mouse.js"],
+        "js": ["/js/modules/keystrokes.js", "/js/modules/mouse.js", "/js/modules/canvas.js"],
         "css": ["/css/keystrokes.css"],
-        "run_at": "document_start"
+        "run_at": "document_start",
+        "all_frames": true,
+        "match_about_blank": true
     }],
     "background": {
         "scripts": ["js/background.js"],
-        "type": "module"
+        "type": "module",
+        "persistent": true
     },
     "icons": {
         "48": "icons/icon-face-48.ico"

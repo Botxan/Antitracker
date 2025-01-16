@@ -1,6 +1,5 @@
 // background.js
 import HeaderObfuscator from "./modules/headers/HeaderObfuscator.js";
-import { canvas, toggleCanvasProtection } from "./modules/canvas.js";
 
 // Single instance of header obfuscator
 const headerObfuscator = new HeaderObfuscator();
@@ -47,20 +46,17 @@ const moduleHandlers = {
     },
 
     canvas: (enabled) => {
-        try {
-            // Initialize canvas protection if not already done
-            if (!canvasInitialized) {
-                canvas();
-                canvasInitialized = true;
+        // Send message to all tabs to toggle canvas protection
+        browser.tabs.query({}).then(tabs => {
+            for (const tab of tabs) {
+                if (tab.url.startsWith('http')) {
+                    browser.tabs.sendMessage(tab.id, {
+                        action: 'toggleCanvas',
+                        enabled: enabled
+                    }).catch(err => console.error('Failed to toggle canvas protection', err));
+                }
             }
-            
-            // Toggle protection
-            toggleCanvasProtection(enabled);
-            
-        } catch (error) {
-            console.error('Error toggling canvas protection:', error);
-            throw error;
-        }
+        });
     }
 };
 
@@ -104,6 +100,13 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
     
     // Required for async response
     return true;
+});
+
+browser.runtime.onMessage.addListener((message) => {
+    if (message.type === 'canvasCall') {
+        console.log('Canvas call detected:', message.details);
+        // You could store these in browser.storage for later analysis
+    }
 });
 
 // Initialize all modules on startup
