@@ -1,9 +1,10 @@
 // background.js
-import HeaderObfuscator from "./actions/headers/HeaderObfuscator.js";
-import { canvas } from "./actions/canvas.js";
+import HeaderObfuscator from "./modules/headers/HeaderObfuscator.js";
+import { canvas, toggleCanvasProtection } from "./modules/canvas.js";
 
 // Single instance of header obfuscator
 const headerObfuscator = new HeaderObfuscator();
+let canvasInitialized = false;
 
 // Handle module state
 const moduleHandlers = {
@@ -18,8 +19,8 @@ const moduleHandlers = {
         // Send message to toggle mouse protection to all tabs
         browser.tabs.query({}).then(tabs => {
             for (const tab of tabs) {
-                console.log("Sending to tab ", tab);
                 if (tab.url.startsWith('http')) {
+                    console.log("nice")
                     browser.tabs.sendMessage(tab.id, {
                         action: 'toggleMouse',
                         enabled: enabled
@@ -46,7 +47,20 @@ const moduleHandlers = {
     },
 
     canvas: (enabled) => {
-        if (enabled) canvas();
+        try {
+            // Initialize canvas protection if not already done
+            if (!canvasInitialized) {
+                canvas();
+                canvasInitialized = true;
+            }
+            
+            // Toggle protection
+            toggleCanvasProtection(enabled);
+            
+        } catch (error) {
+            console.error('Error toggling canvas protection:', error);
+            throw error;
+        }
     }
 };
 
