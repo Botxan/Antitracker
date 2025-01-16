@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Canvas Fingerprinting Protection Demo</title>
+        <style>
+            body {
+                font-family: "Arial", sans-serif;
+                margin: 20px;
+                background: #f4f4f4;
+                color: #333;
+                line-height: 1.6;
+            }
+            h1 {
+                text-align: center;
+                color: #444;
+            }
+            section {
+                margin: 20px auto;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                background: #fff;
+                max-width: 600px;
+            }
+            canvas {
+                display: block;
+                margin: 20px auto;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            p {
+                text-align: center;
+                font-size: 1.2em;
+            }
+            .hash {
+                font-family: "Courier New", Courier, monospace;
+                color: #0078d7;
+                background: #f9f9f9;
+                padding: 5px 10px;
+                border-radius: 4px;
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Canvas Fingerprinting Protection Demo</h1>
+
+        <section id="without-protection">
+            <h2>Without Protection</h2>
+            <canvas id="canvasWithout" width="300" height="150"></canvas>
+            <p>Hash: <span class="hash" id="hashWithout">Calculating...</span></p>
+        </section>
+
+        <section id="with-protection">
+            <h2>With Protection</h2>
+            <canvas id="canvasWith" width="300" height="150"></canvas>
+            <p>Hash: <span class="hash" id="hashWith">Calculating...</span></p>
+        </section>
+
+        <script>
+            // Function to calculate a hash and format it
+            function calculateHash(canvas) {
+                const ctx = canvas.getContext("2d");
+                const data = canvas.toDataURL();
+                let hash = 0;
+                for (let i = 0; i < data.length; i++) {
+                    const char = data.charCodeAt(i);
+                    hash = (hash << 5) - hash + char;
+                    hash |= 0; // Convert to 32bit integer
+                }
+                return ("0000000" + (hash >>> 0).toString(16)).slice(-8); // Format as a hex string
+            }
+
+            // Draw on a canvas with shapes and designs
+            function drawCanvas(canvas, addNoise = false) {
+                const ctx = canvas.getContext("2d");
+
+                // Background color
+                ctx.fillStyle = "#ffefc1";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Draw circles
+                ctx.fillStyle = "#ff6f61";
+                ctx.beginPath();
+                ctx.arc(75, 75, 50, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = "#6fa8dc";
+                ctx.beginPath();
+                ctx.arc(225, 75, 50, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Draw rectangles
+                ctx.fillStyle = "#93c47d";
+                ctx.fillRect(50, 100, 200, 30);
+
+                // Add styled text
+                ctx.fillStyle = "#000";
+                ctx.font = "bold 16px Arial";
+                ctx.textAlign = "center";
+                ctx.fillText("Antitracker", canvas.width / 2, 20);
+
+                if (addNoise) {
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const data = imageData.data;
+                    for (let i = 0; i < data.length; i += 4) {
+                        data[i] += Math.random() * 2 - 1; // R
+                        data[i + 1] += Math.random() * 2 - 1; // G
+                        data[i + 2] += Math.random() * 2 - 1; // B
+                    }
+                    ctx.putImageData(imageData, 0, 0);
+                }
+            }
+
+            // Without protection
+            const canvasWithout = document.getElementById("canvasWithout");
+            drawCanvas(canvasWithout);
+            document.getElementById("hashWithout").textContent = calculateHash(canvasWithout);
+
+            // With protection
+            const canvasWith = document.getElementById("canvasWith");
+            drawCanvas(canvasWith, true);
+            document.getElementById("hashWith").textContent = calculateHash(canvasWith);
+        </script>
+    </body>
+</html>
