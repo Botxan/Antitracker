@@ -1,6 +1,6 @@
 let isMouseProtectionEnabled = false;
 let options = {
-    noiseValue: 1,
+    noiseValue: 10,
     disallowed: []
 };
 
@@ -116,7 +116,7 @@ function cleanup() {
 async function loadSettings() {
     try {
         const prefs = await browser.storage.sync.get({
-            noiseValue: 1,
+            noiseValue: 10,
             disallowed: [],
         });
         options.noiseValue = prefs.noiseValue;
