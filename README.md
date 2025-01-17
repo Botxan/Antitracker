@@ -26,7 +26,7 @@ This last script will send messages to the [background](https://github.com/Botxa
 
 Apart from the main scripts, there are other resources available:
 - A [Canvas Fingerprintg Obfuscation Test App](https://github.com/Botxan/Antitracker/tree/main/canvas-fingerprint-test) to visualize and test how the extension obfuscates canvas fingerprints.
-- A [Mouse Movement Obfuscation Script](https://github.com/Botxan/Antitracker/tree/main/MouseTesting) written in Python to evaluate mouse tracking interference..
+- A [Mouse Movement Obfuscation Script](https://github.com/Botxan/Antitracker/tree/main/mouse-test) written in Python to evaluate mouse tracking interference..
 - Logo assets ([images](https://github.com/Botxan/Antitracker/tree/main/images) and [icons](https://github.com/Botxan/Antitracker/tree/main/icons)).
 
 # Run the Extension
