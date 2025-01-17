@@ -5,29 +5,37 @@
 </div>
 
 ---
+# Table of Contents  
+- [Project Overview](#project-overview)  
+- [Project Structure](#project-structure)  
+- [Run the Extension](#run-the-extension)  
+- [Run the Canvas Fingerprint Testing App](#run-the-canvas-fingerprint-testing-app)  
+- [Debugging](#debugging)  
 
-# Implement your own AntiTracker plugin
-1. Add a new switch to the `popup.html` file:
+# Project Overview
+Antitracker is a Firefox extension designed to protect your privacy online. It features functionalities such as canvas fingerprinting obfuscation, mouse movement obfuscation, header manipulation, and local buffers/overlays to prevent typing tracking. This repository contains the source code, resources, and some of the testing tools for the extension.
 
-![image](https://github.com/user-attachments/assets/77a61290-5e13-40d2-8af0-a2cc1eb0ea5f)
+# Project Structure
+- The metadata of the application is provided in the [manifest.json](https://github.com/Botxan/Antitracker/blob/main/manifest.json) file.
+- The UI of the extension consists of:
+  -   The [HTML structure](https://github.com/Botxan/Antitracker/blob/main/popup.html)
+  -   The [styles and colors](https://github.com/Botxan/Antitracker/tree/main/css)
+  -   The [popup.js script](https://github.com/Botxan/Antitracker/blob/main/js/popup.js)
 
-3. Edit `js/main.js` file:
-  - Add the new html element to the `featureSwitches` array:
-  
-    ![image](https://github.com/user-attachments/assets/57f41fdd-0861-4cb7-a466-8aa0ef7c6646)
-  - Create the event listener function for the new switch:
+This last script will send messages to the [background](https://github.com/Botxan/Antitracker/blob/main/js/background.js) script in the case any of the switches is toggled. The background script is in charge of sending the messages to the different modules in order to enable/disable their functionalities. Scripts for each of the modules are stored under [/js/modules](https://github.com/Botxan/Antitracker/tree/main/js/modules) folder.
 
-    ![image](https://github.com/user-attachments/assets/1065e9f2-f152-4259-80b0-d07d9fe19612)
-  - Implement your functions in the under `/js/actions/<your-actions>.js` (in this case `/js/actions/mouse.js`)
-  
-    ![image](https://github.com/user-attachments/assets/de8836b0-e718-45e4-a09f-cbfe3e35aefe)
+Apart from the main scripts, there are other resources available:
+- A [Canvas Fingerprintg Obfuscation Test App](https://github.com/Botxan/Antitracker/tree/main/canvas-fingerprint-test) to visualize and test how the extension obfuscates canvas fingerprints.
+- A [Mouse Movement Obfuscation Script](https://github.com/Botxan/Antitracker/tree/main/MouseTesting) written in Python to evaluate mouse tracking interference..
+- Logo assets ([images](https://github.com/Botxan/Antitracker/tree/main/images) and [icons](https://github.com/Botxan/Antitracker/tree/main/icons)).
 
----
-
-# Run the extension
+# Run the Extension
 1. Download the repository.
 2. Open Firefox and navigate to about:debugging#/runtime/this-firefox.
 3. Click on "Load Temporary Add-on" and select any of the files of the extension directory.
+
+# Run the Canvas Fingerprint Testing App
+Simply open this [index.html](https://github.com/Botxan/Antitracker/blob/main/canvas-fingerprint-test/index.html) in the browser.
 
 # Debugging
 In order spawn the devtools terminal for the extension, navigate to about:debugging#/runtime/this-firefox, and click the button "Inspect".
